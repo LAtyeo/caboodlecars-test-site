@@ -1,6 +1,6 @@
 
 import { Car, Search } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -13,7 +13,28 @@ const Index = () => {
   const [selectedPriceRange, setSelectedPriceRange] = useState("all");
   const [selectedYear, setSelectedYear] = useState("all");
 
-  // Mock car data
+  // Load Retell AI chat widget
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.id = 'retell-widget';
+    script.src = 'https://dashboard.retellai.com/retell-widget.js';
+    script.type = 'module';
+    script.setAttribute('data-public-key', 'public_key_39206e7cb5b6f30c42d33');
+    script.setAttribute('data-agent-id', 'agent_968fff57e45b5197adca8d5ddd');
+    script.setAttribute('data-agent-version', 'YOUR_RETELL_CHAT_AGENT_VERSION');
+    script.setAttribute('data-title', 'CaboodleCars-Agent');
+    
+    document.head.appendChild(script);
+    
+    return () => {
+      const existingScript = document.getElementById('retell-widget');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
+
+  // Mock car data with more accurate car images
   const cars = [
     {
       id: 1,
@@ -22,7 +43,7 @@ const Index = () => {
       year: 2023,
       price: 45000,
       mileage: 12000,
-      image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       featured: true
     },
     {
@@ -32,7 +53,7 @@ const Index = () => {
       year: 2022,
       price: 52000,
       mileage: 8500,
-      image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       featured: false
     },
     {
@@ -42,7 +63,7 @@ const Index = () => {
       year: 2023,
       price: 48000,
       mileage: 5200,
-      image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       featured: true
     },
     {
@@ -52,7 +73,7 @@ const Index = () => {
       year: 2023,
       price: 28000,
       mileage: 15000,
-      image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       featured: false
     },
     {
@@ -62,7 +83,7 @@ const Index = () => {
       year: 2022,
       price: 32000,
       mileage: 22000,
-      image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       featured: false
     },
     {
@@ -72,7 +93,7 @@ const Index = () => {
       year: 2023,
       price: 38000,
       mileage: 3500,
-      image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       featured: true
     },
     {
@@ -82,7 +103,7 @@ const Index = () => {
       year: 2022,
       price: 26000,
       mileage: 18000,
-      image: "https://images.unsplash.com/photo-1494905998402-395d579af36f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.unsplash.com/photo-1494905998402-395d579af36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       featured: false
     },
     {
@@ -92,7 +113,7 @@ const Index = () => {
       year: 2023,
       price: 29000,
       mileage: 8900,
-      image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       featured: false
     }
   ];
@@ -125,23 +146,23 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-amber-50">
       {/* Header */}
       <header className="bg-white shadow-lg border-b border-slate-200">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-3 rounded-xl">
+              <div className="bg-gradient-to-r from-amber-500 to-yellow-600 p-3 rounded-xl">
                 <Car className="h-8 w-8 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-amber-500 to-yellow-600 bg-clip-text text-transparent">
                   Caboodle Cars
                 </h1>
                 <p className="text-sm text-slate-600">Your Trusted Car Dealer</p>
               </div>
             </div>
-            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
+            <Button className="bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700">
               Contact Us
             </Button>
           </div>
@@ -149,13 +170,13 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white py-20">
+      <section className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-5xl font-bold mb-4">Find Your Perfect Car</h2>
-          <p className="text-xl mb-8 text-blue-100">
+          <p className="text-xl mb-8 text-amber-100">
             Premium vehicles, exceptional service, unbeatable prices at Caboodle Cars
           </p>
-          <div className="flex items-center justify-center space-x-2 text-blue-200">
+          <div className="flex items-center justify-center space-x-2 text-amber-200">
             <Car className="h-6 w-6" />
             <span className="text-lg font-semibold">Over 100+ Cars Available</span>
           </div>
@@ -243,7 +264,7 @@ const Index = () => {
               Showing {filteredCars.length} of {cars.length} vehicles
             </p>
           </div>
-          <div className="flex items-center space-x-2 text-blue-600">
+          <div className="flex items-center space-x-2 text-amber-600">
             <Car className="h-5 w-5" />
             <span className="font-semibold">Caboodle Cars</span>
           </div>
@@ -271,7 +292,7 @@ const Index = () => {
                     </Badge>
                   )}
                   <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full p-2">
-                    <Car className="h-4 w-4 text-blue-600" />
+                    <Car className="h-4 w-4 text-amber-600" />
                   </div>
                 </div>
                 <CardContent className="p-6">
@@ -283,7 +304,7 @@ const Index = () => {
                       <p className="text-slate-600 text-sm">{car.year}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-blue-600">
+                      <p className="text-2xl font-bold text-amber-600">
                         {formatPrice(car.price)}
                       </p>
                     </div>
@@ -291,10 +312,10 @@ const Index = () => {
                   
                   <div className="flex items-center justify-between text-sm text-slate-600 mb-4">
                     <span>{car.mileage.toLocaleString()} miles</span>
-                    <span className="text-blue-600 font-medium">Caboodle Cars</span>
+                    <span className="text-amber-600 font-medium">Caboodle Cars</span>
                   </div>
                   
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
+                  <Button className="w-full bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700">
                     View Details
                   </Button>
                 </CardContent>
@@ -310,7 +331,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-3 rounded-xl">
+                <div className="bg-gradient-to-r from-amber-500 to-yellow-600 p-3 rounded-xl">
                   <Car className="h-8 w-8 text-white" />
                 </div>
                 <div>
@@ -327,10 +348,10 @@ const Index = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-slate-300">
-                <li><a href="#" className="hover:text-blue-400 transition-colors">Inventory</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors">Financing</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors">Trade-In</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors">Service</a></li>
+                <li><a href="#" className="hover:text-amber-400 transition-colors">Inventory</a></li>
+                <li><a href="#" className="hover:text-amber-400 transition-colors">Financing</a></li>
+                <li><a href="#" className="hover:text-amber-400 transition-colors">Trade-In</a></li>
+                <li><a href="#" className="hover:text-amber-400 transition-colors">Service</a></li>
               </ul>
             </div>
             
