@@ -1,3 +1,4 @@
+
 import { Car, Search } from "lucide-react";
 import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ const Index = () => {
     const script = document.createElement('script');
     script.id = 'retell-widget';
     script.src = 'https://dashboard.retellai.com/retell-widget.js';
-    script.setAttribute('data-public-key', 'agent_17a1ad2684c84d9e8ceef2ba14');
+    script.setAttribute('data-public-key', 'public_key_a620e4d0b72cdc729525a');
     script.setAttribute('data-agent-id', 'agent_17a1ad2684c84d9e8ceef2ba14');
     script.setAttribute('data-agent-version', '0');
     script.setAttribute('data-title', 'Chat with us!');
