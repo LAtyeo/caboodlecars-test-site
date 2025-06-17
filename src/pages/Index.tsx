@@ -1,4 +1,3 @@
-
 import { Car, Search } from "lucide-react";
 import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -13,16 +12,15 @@ const Index = () => {
   const [selectedPriceRange, setSelectedPriceRange] = useState("all");
   const [selectedYear, setSelectedYear] = useState("all");
 
-  // Load Retell AI chat widget
+  // Load Retell AI chat widget with the new configuration
   useEffect(() => {
     const script = document.createElement('script');
     script.id = 'retell-widget';
     script.src = 'https://dashboard.retellai.com/retell-widget.js';
-    script.type = 'module';
-    script.setAttribute('data-public-key', 'public_key_39206e7cb5b6f30c42d33');
-    script.setAttribute('data-agent-id', 'agent_968fff57e45b5197adca8d5ddd');
-    script.setAttribute('data-agent-version', 'YOUR_RETELL_CHAT_AGENT_VERSION');
-    script.setAttribute('data-title', 'CaboodleCars-Agent');
+    script.setAttribute('data-public-key', 'agent_17a1ad2684c84d9e8ceef2ba14');
+    script.setAttribute('data-agent-id', 'agent_17a1ad2684c84d9e8ceef2ba14');
+    script.setAttribute('data-agent-version', '0');
+    script.setAttribute('data-title', 'Chat with us!');
     
     document.head.appendChild(script);
     
